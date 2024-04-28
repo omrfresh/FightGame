@@ -9,6 +9,8 @@ namespace Game
 {
     public class FightWindow : GameWindow
     {
+        private double _elapsedTime;
+        public static double ElapsedTime => _elapsedTime;
         private Buffer _buffer;
         private Texture _texture;
         private TextureMap _textureMap;
@@ -69,6 +71,8 @@ namespace Game
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
+
+            _elapsedTime = e.Time;
 
             GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit);
