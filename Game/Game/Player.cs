@@ -1,34 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.StateMachine;
+﻿using Game.StateMachine;
 
 namespace Game
 {
     public class Player
     {
-        public PlayerState CurrentState { get; private set; }
+        private IState _currentState;
 
-        public Player()
+        public void ChangeState(IState newState)
         {
-            CurrentState = new IdleState(this);
-        }
-
-        public void ChangeState(PlayerState newState)
-        {
-            CurrentState = newState;
-        }
-
-        public void HandleInput()
-        {
-            CurrentState.HandleInput();
+            _currentState?.Exit(this);
+            _currentState = newState;
+            _currentState.Enter(this);
         }
 
         public void Update()
         {
-            CurrentState.Update();
+            _currentState.Update(this);
         }
     }
 }

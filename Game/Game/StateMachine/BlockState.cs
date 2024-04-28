@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace Game.StateMachine
 {
-    public class BlockState : PlayerState
+    public class BlockState : IState
     {
-        public BlockState(Player player) : base(player) { }
-
-        public override void HandleInput()
+        public void Enter(Player player)
         {
-            // Обработать ввод для перехода в другие состояния
+            // Код для перехода в состояние "ожидание"
         }
 
-        public override void Update()
+        public void Exit(Player player)
         {
-            // Обновить логику состояния блокирования
+            // Код для выхода из состояния "ожидание"
+        }
+
+        public void Update(Player player)
+        {
+            // Обновление логики для состояния "ожидание"
         }
     }
 }

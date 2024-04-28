@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game.StateMachine
+﻿namespace Game.StateMachine
 {
-    public class IdleState : PlayerState
+    public class IdleState : IState
     {
-        public IdleState(Player player) : base(player) { }
-
-        public override void HandleInput()
+        public void Enter(Player player)
         {
-            // Обработать ввод для перехода в другие состояния
+            // Код для перехода в состояние "ожидание"
         }
 
-        public override void Update()
+        public void Exit(Player player)
         {
-            // Обновить логику состояния простоя
+            // Код для выхода из состояния "ожидание"
+        }
+
+        public void Update(Player player)
+        {
+            // Обновление логики для состояния "ожидание"
         }
     }
 }
+// Аналогично для других состояний

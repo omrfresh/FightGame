@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace Game.StateMachine
 {
-    public class MoveState : PlayerState
+    public class MoveState : IState
     {
-        public MoveState(Player player) : base(player) { }
-
-        public override void HandleInput()
+        public void Enter(Player player)
         {
-            // Обработать ввод для перехода в другие состояния
+            // Код для перехода в состояние "ожидание"
         }
 
-        public override void Update()
+        public void Exit(Player player)
         {
-            // Обновить логику состояния перемещения
+            // Код для выхода из состояния "ожидание"
+        }
+
+        public void Update(Player player)
+        {
+            // Обновление логики для состояния "ожидание"
         }
     }
 }
