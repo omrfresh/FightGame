@@ -1,10 +1,28 @@
 ﻿using Game.StateMachine;
+using OpenTK.Mathematics;
 
 namespace Game
 {
     public class Player
     {
+        public Vector2 Position { get; set; }
+        public float Health { get; set; }
+        public float Damage { get; set; }
+        public float AttackRange { get; set; }
+        public float Speed { get; set; }
+
         private IState _currentState;
+
+        public Player()
+        {
+            Position = new Vector2(0, 0);
+            Health = 100;
+            Damage = 10;
+            AttackRange = 1;
+            Speed = 2;
+
+            _currentState = new IdleState();
+        }
 
         public void ChangeState(IState newState)
         {
@@ -18,4 +36,5 @@ namespace Game
             _currentState.Update(this);
         }
     }
+
 }
