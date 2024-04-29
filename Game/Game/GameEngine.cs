@@ -1,23 +1,24 @@
-﻿namespace Game
+﻿using OpenTK.Mathematics;
+
+namespace Game
 {
     public static class GameEngine
     {
         private static List<Player> _players = new List<Player>();
-        private static List<Enemy> _enemies = new List<Enemy>();
 
         public static void AddPlayer(Player player)
         {
             _players.Add(player);
         }
 
-        public static void AddEnemy(Enemy enemy)
+        public static Player GetOpponent(Player player)
         {
-            _enemies.Add(enemy);
+            return _players.FirstOrDefault(p => p != player);
         }
 
-        public static List<Enemy> GetEnemiesInRange(Vector2 position, float range)
+        public static bool IsInRange(Player attacker, Player defender, float range)
         {
-            return _enemies.Where(enemy => Vector2.Distance(position, enemy.Position) <= range).ToList();
+            return Vector2.Distance(attacker.Position, defender.Position) <= range;
         }
     }
 }

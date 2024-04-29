@@ -1,4 +1,5 @@
-﻿using OpenTK.Windowing.Desktop;
+﻿using Game;
+using OpenTK.Windowing.Desktop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace Game.StateMachine
     {
         private float _attackTimer;
         private float _attackCooldown = 1f; // Задержка между атаками в секундах
+        private Player _player;
+
+        public AttackState(Player player)
+        {
+            _player = player;
+        }
 
         public void Enter(Player player)
         {
@@ -25,27 +32,27 @@ namespace Game.StateMachine
 
         public void Update(Player player)
         {
-            _attackTimer += (float)GameWindow.ElapsedTime;
+            _attackTimer += (float)_player._gameWindow.ElapsedTime;
 
             if (_attackTimer >= _attackCooldown)
             {
-                // Нанесение урона противнику в радиусе атаки
-                var enemies = GameEngine.GetEnemiesInRange(player.Position, player.AttackRange);
-                foreach (var enemy in enemies)
+                var opponent = GameEngine.GetOpponent(_player);
+
+                if (opponent != null && GameEngine.IsInRange(_player, opponent, _player.AttackRange))
                 {
-                    enemy.Health -= player.Damage;
+                    opponent.Health -= _player.Damage;
                 }
 
-                // Сброс таймера атаки
-                _attackTimer = 0;
+                _attackTimer = 0f;
             }
 
             // Если атака завершена, переходим в состояние "ожидание"
             if (_attackTimer == 0)
             {
-                player.ChangeState(new IdleState());
+                _player.ChangeState(new IdleState(_player));
             }
         }
     }
+
 
 }

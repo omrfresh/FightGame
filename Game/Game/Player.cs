@@ -1,5 +1,6 @@
 ﻿using Game.StateMachine;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Desktop;
 
 namespace Game
 {
@@ -12,8 +13,10 @@ namespace Game
         public float Speed { get; set; }
 
         private IState _currentState;
+        public FightWindow gameWindow;
 
-        public Player()
+
+        public Player(FightWindow gameWindow)
         {
             Position = new Vector2(0, 0);
             Health = 100;
@@ -21,7 +24,8 @@ namespace Game
             AttackRange = 1;
             Speed = 2;
 
-            _currentState = new IdleState();
+            _currentState = new IdleState(this);
+            
         }
 
         public void ChangeState(IState newState)

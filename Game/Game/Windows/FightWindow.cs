@@ -9,14 +9,14 @@ namespace Game
 {
     public class FightWindow : GameWindow
     {
-        private double _elapsedTime;
-        public static double ElapsedTime => _elapsedTime;
+        public double ElapsedTime { get; private set; }
         private Buffer _buffer;
         private Texture _texture;
         private TextureMap _textureMap;
         private Buffer _playerBuffer;
         private Texture _backgroundTexture;
         private Buffer _backgroundBuffer;
+        private Player _player;
 
         public FightWindow() : base(new GameWindowSettings()
         {
@@ -35,6 +35,8 @@ namespace Game
         protected override void OnLoad()
         {
             base.OnLoad();
+
+            _player = new Player(this);
 
             double[] backgroundVertices = new double[]
             {
@@ -72,7 +74,7 @@ namespace Game
         {
             base.OnRenderFrame(e);
 
-            _elapsedTime = e.Time;
+            ElapsedTime = e.Time;
 
             GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit);
