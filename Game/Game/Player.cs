@@ -39,6 +39,10 @@ namespace Game
         {
             _currentState.Update(this);
         }
+        public void Attack()
+        {
+            ChangeState(new AttackState(this));
+        }
     }
 
 }

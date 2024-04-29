@@ -4,6 +4,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using Game;
+using Game.Input;
 
 namespace Game
 {
@@ -16,7 +17,10 @@ namespace Game
         private Buffer _playerBuffer;
         private Texture _backgroundTexture;
         private Buffer _backgroundBuffer;
-        private Player _player;
+        private Player _player1;
+        private Player _player2;
+        private IInputHandler _inputHandler1;
+        private IInputHandler _inputHandler2;
 
         public FightWindow() : base(new GameWindowSettings()
         {
@@ -36,7 +40,11 @@ namespace Game
         {
             base.OnLoad();
 
-            _player = new Player(this);
+            _player1 = new Player(this);
+            _player2 = new Player(this);
+
+            _inputHandler1 = new PlayerInputHandler(_player1);
+            _inputHandler2 = new PlayerInputHandler(_player2);
 
             double[] backgroundVertices = new double[]
             {
