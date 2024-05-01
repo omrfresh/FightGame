@@ -13,7 +13,7 @@ namespace Game.StateMachine
         private float _attackTimer;
         private float _attackCooldown = 1f; // Задержка между атаками в секундах
         private Player _player;
-
+        public bool IsOpponentKilled { get; private set; }
         public AttackState(Player player)
         {
             _player = player;
@@ -28,11 +28,12 @@ namespace Game.StateMachine
         {
             // Сброс таймера атаки при выходе из состояния атаки
             _attackTimer = 0;
+            IsOpponentKilled = false;
         }
 
         public void Update(Player player)
         {
-            _attackTimer += (float)_player._gameWindow.ElapsedTime;
+            _attackTimer += (float)_player.gameWindow.ElapsedTime;
 
             if (_attackTimer >= _attackCooldown)
             {
@@ -41,6 +42,11 @@ namespace Game.StateMachine
                 if (opponent != null && GameEngine.IsInRange(_player, opponent, _player.AttackRange))
                 {
                     opponent.Health -= _player.Damage;
+
+                    if (opponent.Health <= 0)
+                    {
+                        IsOpponentKilled = true;
+                    }
                 }
 
                 _attackTimer = 0f;

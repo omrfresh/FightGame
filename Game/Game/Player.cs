@@ -11,17 +11,23 @@ namespace Game
         public float Damage { get; set; }
         public float AttackRange { get; set; }
         public float Speed { get; set; }
+        public string Name { get; set; }
+        public Buffer PlayerBuffer { get; set; }
+        public Texture PlayerTexture { get; set; }
 
         private IState _currentState;
         public FightWindow gameWindow;
 
 
-        public Player(FightWindow gameWindow)
+        public Player(FightWindow gameWindow, Vector2 position, string name)
         {
-            Position = new Vector2(0, 0);
+            PlayerBuffer = null;
+            PlayerTexture = null;
+            Position = position;
+            Name = name;
             Health = 100;
             Damage = 10;
-            AttackRange = 1;
+            AttackRange = 1000;
             Speed = 2;
 
             _currentState = new IdleState(this);
@@ -42,6 +48,10 @@ namespace Game
         public void Attack()
         {
             ChangeState(new AttackState(this));
+        }
+        public IState GetCurrentState()
+        {
+            return _currentState;
         }
     }
 

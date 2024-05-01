@@ -1,10 +1,8 @@
 ﻿using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenTK.Mathematics;
 using Game;
+using Game.StateMachine;
 
 namespace Game.Input
 {
@@ -19,11 +17,36 @@ namespace Game.Input
 
         public void HandleInput(KeyboardState keyboardState)
         {
-            if (keyboardState.IsKeyDown(Keys.F))
+            if (_player.Name == "Player1")
             {
-                _player.Attack();
+                if (keyboardState.IsKeyDown(Keys.F))
+                {
+                    _player.Attack();
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    _player.ChangeState(new MoveState(_player, new Vector2(-1, 0)));
+                }
+                if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    _player.ChangeState(new MoveState(_player, new Vector2(1, 0)));
+                }
+            }
+            else if (_player.Name == "Player2")
+            {
+                if (keyboardState.IsKeyDown(Keys.LeftShift))
+                {
+                    _player.Attack();
+                }
+                if (keyboardState.IsKeyDown(Keys.Left))
+                {
+                    _player.ChangeState(new MoveState(_player, new Vector2(-1, 0)));
+                }
+                if (keyboardState.IsKeyDown(Keys.Right))
+                {
+                    _player.ChangeState(new MoveState(_player, new Vector2(1, 0)));
+                }
             }
         }
     }
-
 }
