@@ -12,6 +12,7 @@ namespace Game
         public float AttackRange { get; set; }
         public float Speed { get; set; }
         public string Name { get; set; }
+        public bool IsBlocked { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
 
@@ -27,7 +28,7 @@ namespace Game
             Name = name;
             Health = 100;
             Damage = 10;
-            AttackRange = 1;
+            AttackRange = 1000;
             Speed = 2;
 
             _currentState = new IdleState(this);
@@ -52,6 +53,15 @@ namespace Game
         public IState GetCurrentState()
         {
             return _currentState;
+        }
+        public void Block()
+        {
+            IsBlocked = true;
+        }
+
+        public void Unblock()
+        {
+            IsBlocked = false;
         }
     }
 

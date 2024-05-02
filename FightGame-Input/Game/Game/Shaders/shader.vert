@@ -8,6 +8,7 @@ layout(location = 1) in vec2 aTexCoord;
 
 // ...However, they aren't needed for the vertex shader itself.
 // Instead, we create an output variable so we can send that data to the fragment shader.
+
 out vec2 texCoord;
 
 void main(void)

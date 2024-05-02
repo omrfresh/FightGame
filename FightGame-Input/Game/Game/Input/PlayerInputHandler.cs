@@ -31,10 +31,6 @@ namespace Game.Input
                 {
                     _player.ChangeState(new MoveState(_player, new Vector2(1, 0)));
                 }
-                if (keyboardState.IsKeyDown(Keys.S)) // Клавиша блокировки для первого игрока
-                {
-                    _player.ChangeState(new BlockState(_player));
-                }
             }
             else if (_player.Name == "Player2")
             {
@@ -49,10 +45,6 @@ namespace Game.Input
                 if (keyboardState.IsKeyDown(Keys.Right))
                 {
                     _player.ChangeState(new MoveState(_player, new Vector2(1, 0)));
-                }
-                if (keyboardState.IsKeyDown(Keys.Down)) // Клавиша блокировки для второго игрока
-                {
-                    _player.ChangeState(new BlockState(_player));
                 }
             }
         }
