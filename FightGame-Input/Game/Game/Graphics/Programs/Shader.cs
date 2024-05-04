@@ -115,5 +115,10 @@ namespace Game
             GL.DeleteProgram(Handle);
             _uniformLocations.Clear();
         }
+        //public void SetVector2(string name, Vector2 data)
+        //{
+        //    GL.UseProgram(Handle);
+        //    GL.Uniform2(_uniformLocations[name], data);
+        //}
     }
 }

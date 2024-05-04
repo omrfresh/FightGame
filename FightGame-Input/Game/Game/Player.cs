@@ -1,7 +1,8 @@
 ﻿using Game.StateMachine;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
-
+using OpenTK.Windowing.GraphicsLibraryFramework;
+using Game.Input;
 namespace Game
 {
     public class Player
@@ -15,10 +16,26 @@ namespace Game
         public bool IsBlocked { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
+        public Texture AttackTexture { get; set; }
 
         private IState _currentState;
-        public FightWindow gameWindow;
+        public FightWindow gameWindow { get; private set; }
+        public IState CurrentState => _currentState;
 
+        public void UpdateBuffer()
+        {
+            double[] playerVertices = new double[]
+            {
+        Position.X - 0.25, Position.Y - 0.25, 0.0, 0.0, 0.0,
+        Position.X + 0.25, Position.Y - 0.25, 0.0, 1.0, 0.0,
+        Position.X + 0.25, Position.Y + 0.25, 0.0, 1.0, 1.0,
+        Position.X - 0.25, Position.Y + 0.25, 0.0, 0.0, 1.0,
+        Position.X - 0.25, Position.Y - 0.25, 0.0, 0.0, 0.0,
+        Position.X + 0.25, Position.Y + 0.25, 0.0, 1.0, 1.0,
+            };
+
+            PlayerBuffer.UpdateData(playerVertices);
+        }
 
         public Player(FightWindow gameWindow, Vector2 position, string name)
         {
@@ -28,9 +45,9 @@ namespace Game
             Name = name;
             Health = 100;
             Damage = 10;
-            AttackRange = 1000;
+            AttackRange = 10000;
             Speed = 2;
-
+            this.gameWindow = gameWindow;
             _currentState = new IdleState(this);
             
         }
@@ -44,7 +61,16 @@ namespace Game
 
         public void Update()
         {
+            if (_currentState is AttackState)
+            {
+                PlayerTexture = AttackTexture;
+            }
+            else
+            {
+                PlayerTexture = PlayerTexture;
+            }
             _currentState.Update(this);
+            UpdateBuffer();
         }
         public void Attack()
         {
@@ -63,6 +89,30 @@ namespace Game
         {
             IsBlocked = false;
         }
-    }
+        public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
+        {
+            if (moveLeft && !moveRight)
+            {
+                ChangeState(new MoveState(this, new Vector2(-Speed, 0)));
+            }
+            else if (moveRight && !moveLeft)
+            {
+                ChangeState(new MoveState(this, new Vector2(Speed, 0)));
+            }
+            else if (attack)
+            {
+                ChangeState(new AttackState(this));
+            }
+            else if (block)
+            {
+                ChangeState(new BlockState(this));
+            }
+            else
+            {
+                ChangeState(new IdleState(this));
+            }
 
+            _currentState.Update(this);
+        }
+    }
 }
