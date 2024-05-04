@@ -1,8 +1,7 @@
 ﻿using Game.StateMachine;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using Game.Input;
+using OpenTK.Graphics.OpenGL;
+
 namespace Game
 {
     public class Player
@@ -22,21 +21,6 @@ namespace Game
         public FightWindow gameWindow { get; private set; }
         public IState CurrentState => _currentState;
 
-        public void UpdateBuffer()
-        {
-            double[] playerVertices = new double[]
-            {
-        Position.X - 0.25, Position.Y - 0.25, 0.0, 0.0, 0.0,
-        Position.X + 0.25, Position.Y - 0.25, 0.0, 1.0, 0.0,
-        Position.X + 0.25, Position.Y + 0.25, 0.0, 1.0, 1.0,
-        Position.X - 0.25, Position.Y + 0.25, 0.0, 0.0, 1.0,
-        Position.X - 0.25, Position.Y - 0.25, 0.0, 0.0, 0.0,
-        Position.X + 0.25, Position.Y + 0.25, 0.0, 1.0, 1.0,
-            };
-
-            PlayerBuffer.UpdateData(playerVertices);
-        }
-
         public Player(FightWindow gameWindow, Vector2 position, string name)
         {
             PlayerBuffer = null;
@@ -46,10 +30,10 @@ namespace Game
             Health = 100;
             Damage = 10;
             AttackRange = 10000;
-            Speed = 2;
+            Speed = 1.15f;
             this.gameWindow = gameWindow;
             _currentState = new IdleState(this);
-            
+
         }
 
         public void ChangeState(IState newState)
@@ -88,6 +72,32 @@ namespace Game
         public void Unblock()
         {
             IsBlocked = false;
+        }
+        public void UpdateBuffer()
+        {
+            double[] playerVertices = new double[]
+            {
+            Position.X - 0.25, Position.Y - 0.25, 0.0, 0.0, 0.0,
+            Position.X + 0.25, Position.Y - 0.25, 0.0, 1.0, 0.0,
+            Position.X + 0.25, Position.Y + 0.25, 0.0, 1.0, 1.0,
+            Position.X - 0.25, Position.Y + 0.25, 0.0, 0.0, 1.0,
+            Position.X - 0.25, Position.Y - 0.25, 0.0, 0.0, 0.0,
+            Position.X + 0.25, Position.Y + 0.25, 0.0, 1.0, 1.0,
+            };
+
+            PlayerBuffer.UpdateData(playerVertices);
+        }
+        public void UpdateTextureCoordinates()
+        {
+            double[] textureCoordinates = new double[]
+            {
+              Position.X - 0.25, Position.Y + 0.25,
+              Position.X + 0.25, Position.Y + 0.25,
+              Position.X + 0.25, Position.Y - 0.25,
+              Position.X - 0.25, Position.Y - 0.25,
+            };
+
+            PlayerBuffer.UpdateData(textureCoordinates, 2 * sizeof(double));
         }
         public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
         {

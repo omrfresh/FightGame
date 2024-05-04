@@ -84,7 +84,11 @@ namespace Game
             GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
             GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, (IntPtr)(data.Length * sizeof(double)), data);
         }
-
+        public void UpdateData(double[] data, int offset)
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, (IntPtr)(data.Length * sizeof(double)), data);
+        }
 
         public void Dispose()
         {

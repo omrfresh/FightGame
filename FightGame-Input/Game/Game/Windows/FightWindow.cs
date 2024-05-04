@@ -33,11 +33,13 @@ namespace Game
         private bool _player1MoveRight;
         private bool _player1Attack;
         private bool _player1Block;
-
         private bool _player2MoveLeft;
         private bool _player2MoveRight;
         private bool _player2Attack;
         private bool _player2Block;
+        private HealthBar _player1HealthBar;
+        private HealthBar _player2HealthBar;
+        private Texture _healthTexture;
 
         public FightWindow() : base(new GameWindowSettings()
         {
@@ -117,6 +119,12 @@ namespace Game
             _player1.PlayerTexture = _player1Texture;
             _player2.PlayerBuffer = _player2Buffer;
             _player2.PlayerTexture = _player2Texture;
+
+            // Загружаем текстуру полосы здоровья
+            _healthTexture = Texture.LoadFromFile(@"Textures\health_bar.png");
+            // Создаем экземпляры HealthBar для каждого игрока
+            _player1HealthBar = new HealthBar(_healthTexture, 0.2, 0.05, new Vector2(-0.75f, 0.75f), 100);
+            _player2HealthBar = new HealthBar(_healthTexture, 0.2, 0.05, new Vector2(0.75f, 0.75f), 100);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -140,6 +148,13 @@ namespace Game
 
             _player1.Update(_player1MoveLeft, _player1MoveRight, _player1Attack, _player1Block);
             _player2.Update(_player2MoveLeft, _player2MoveRight, _player2Attack, _player2Block);
+            _player1.UpdateBuffer();
+            _player2.UpdateBuffer();
+            // _player1.UpdateTextureCoordinates();
+            // _player2.UpdateTextureCoordinates();
+            // Обновляем HealthBar для каждого игрока
+            _player1HealthBar.Update(_player1.Health);
+            _player2HealthBar.Update(_player2.Health);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -211,7 +226,9 @@ namespace Game
                 _player2Texture.Use(TextureUnit.Texture0);
                 _player2Buffer.Render(_player2Texture);
             }
-
+            // Рендерим HealthBar для каждого игрока
+            _player1HealthBar.Render();
+            _player2HealthBar.Render();
             SwapBuffers();
         }
 
