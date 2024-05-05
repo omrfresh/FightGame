@@ -1,6 +1,8 @@
 ﻿using Game.StateMachine;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
+using Game;
+using System.ComponentModel;
 
 namespace Game
 {
@@ -15,12 +17,14 @@ namespace Game
         public bool IsBlocked { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
+        //Можно убрать AttackTexture
         public Texture AttackTexture { get; set; }
-
-        private IState _currentState;
         public FightWindow gameWindow { get; private set; }
+        public Player Opponent { get; set; }
+        private IState _currentState;
         public IState CurrentState => _currentState;
 
+        //Конструктор
         public Player(FightWindow gameWindow, Vector2 position, string name)
         {
             PlayerBuffer = null;
@@ -28,14 +32,15 @@ namespace Game
             Position = position;
             Name = name;
             Health = 100;
-            Damage = 10;
-            AttackRange = 10000;
+            Damage = 0.5f;
+            AttackRange = 0.55f;
             Speed = 1.15f;
             this.gameWindow = gameWindow;
             _currentState = new IdleState(this);
 
         }
 
+        //Методы
         public void ChangeState(IState newState)
         {
             _currentState?.Exit(this);
@@ -56,23 +61,23 @@ namespace Game
             _currentState.Update(this);
             UpdateBuffer();
         }
-        public void Attack()
-        {
-            ChangeState(new AttackState(this));
-        }
-        public IState GetCurrentState()
-        {
-            return _currentState;
-        }
-        public void Block()
-        {
-            IsBlocked = true;
-        }
+        //public void Attack()
+        //{
+        //    _currentState = new AttackState(this);
+        //}
+        //public IState GetCurrentState()
+        //{
+        //    return _currentState;
+        //}
+        //public void Block()
+        //{
+        //    IsBlocked = true;
+        //}
 
-        public void Unblock()
-        {
-            IsBlocked = false;
-        }
+        //public void Unblock()
+        //{
+        //    IsBlocked = false;
+        //}
         public void UpdateBuffer()
         {
             double[] playerVertices = new double[]
@@ -87,18 +92,18 @@ namespace Game
 
             PlayerBuffer.UpdateData(playerVertices);
         }
-        public void UpdateTextureCoordinates()
-        {
-            double[] textureCoordinates = new double[]
-            {
-              Position.X - 0.25, Position.Y + 0.25,
-              Position.X + 0.25, Position.Y + 0.25,
-              Position.X + 0.25, Position.Y - 0.25,
-              Position.X - 0.25, Position.Y - 0.25,
-            };
+        //public void UpdateTextureCoordinates()
+        //{
+        //    double[] textureCoordinates = new double[]
+        //    {
+        //      Position.X - 0.25, Position.Y + 0.25,
+        //      Position.X + 0.25, Position.Y + 0.25,
+        //      Position.X + 0.25, Position.Y - 0.25,
+        //      Position.X - 0.25, Position.Y - 0.25,
+        //    };
 
-            PlayerBuffer.UpdateData(textureCoordinates, 2 * sizeof(double));
-        }
+        //    PlayerBuffer.UpdateData(textureCoordinates, 2 * sizeof(double));
+        //}
         public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
         {
             if (moveLeft && !moveRight)
@@ -111,7 +116,7 @@ namespace Game
             }
             else if (attack)
             {
-                ChangeState(new AttackState(this));
+                _currentState = new AttackState(this); ;
             }
             else if (block)
             {
