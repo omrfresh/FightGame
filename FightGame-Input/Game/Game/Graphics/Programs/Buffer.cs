@@ -17,6 +17,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.IO;
 using System.Numerics;
+using SixLabors.ImageSharp.Memory;
 
 namespace Game
 {
@@ -36,7 +37,14 @@ namespace Game
             this.vertices = vertices;
             GenerateBuffers();
         }
-
+        //public void Render(Texture texture, OpenTK.Mathematics.Vector2 position)
+        //{
+        //    GL.BindVertexArray(vertexArrayObject);
+        //    texture.Use(TextureUnit.Texture0);
+        //    shader.Use();
+        //    shader.SetVector2("u_Position", position);
+        //    GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length / 5);
+        //}
         private void GenerateBuffers()
         {
             vertexArrayObject = GL.GenVertexArray();
@@ -70,6 +78,16 @@ namespace Game
             texture.Use(TextureUnit.Texture0);
             shader.Use();
             GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length / 5);
+        }
+        public void UpdateData(double[] data)
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, (IntPtr)(data.Length * sizeof(double)), data);
+        }
+        public void UpdateData(double[] data, int offset)
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, (IntPtr)(data.Length * sizeof(double)), data);
         }
 
         public void Dispose()
