@@ -14,7 +14,7 @@ namespace Game
         public float AttackRange { get; set; }
         public float Speed { get; set; }
         public string Name { get; set; }
-        public bool IsBlocked { get; private set; }
+        public bool IsBlocking { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
         //Можно убрать AttackTexture
@@ -69,15 +69,16 @@ namespace Game
         //{
         //    return _currentState;
         //}
-        //public void Block()
-        //{
-        //    IsBlocked = true;
-        //}
+        public void Block()
+        {
+            IsBlocking = true;
+        }
 
-        //public void Unblock()
-        //{
-        //    IsBlocked = false;
-        //}
+        public void Unblock()
+        {
+            IsBlocking = false;
+        }
+
         public void UpdateBuffer()
         {
             double[] playerVertices = new double[]

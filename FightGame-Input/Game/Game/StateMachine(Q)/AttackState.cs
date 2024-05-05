@@ -48,10 +48,17 @@ namespace Game.StateMachine
             {
                 if (IsInAttackRange())
                 {
-                    _opponent.Health -= player.Damage;
+                    if (_opponent.IsBlocking) // проверяем, блокирует ли противник атаки
+                    {
+                        _opponent.Health -= 0;
+                    }
+                    else
+                    {
+                        _opponent.Health -= player.Damage;
+                    }
                     _attackTimer = 1f;
 
-                    using (StreamWriter sw = new StreamWriter("debug.log", false))
+                        using (StreamWriter sw = new StreamWriter("debug.log", false))
                     {
                         sw.WriteLine($"{DateTime.Now}: AttackState.Update() called, _opponent.Health = {_opponent.Health}, damage ={player.Damage}");
                     }
