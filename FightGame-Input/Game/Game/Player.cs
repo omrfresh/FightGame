@@ -13,7 +13,7 @@ namespace Game
         public float Damage { get; set; }
         public float AttackRange { get; set; }
         public float Speed { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } 
         public bool IsBlocking { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
