@@ -12,7 +12,7 @@ namespace Game
             _player = player;
         }
         public IState CurrentState => _player.CurrentState;
-        public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
+        public void Update(bool moveLeft, bool moveRight, bool attack, bool block, bool legAttack, bool comboAttack)
         {
             if (moveLeft && !moveRight)
             {
@@ -24,7 +24,15 @@ namespace Game
             }
             else if (attack)
             {
-                _player.ChangeState(new AttackState(_player));
+                _player.ChangeState(new AttackState(_player, AttackType.Hand));
+            }
+            else if (legAttack)
+            {
+                _player.ChangeState(new AttackState(_player, AttackType.Leg));
+            }
+            else if (comboAttack)
+            {
+                _player.ChangeState(new AttackState(_player, AttackType.Combo));
             }
             else if (block)
             {

@@ -105,30 +105,30 @@ namespace Game
 
         //    PlayerBuffer.UpdateData(textureCoordinates, 2 * sizeof(double));
         //}
-        public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
-        {
-            if (moveLeft && !moveRight)
-            {
-                ChangeState(new MoveState(this, new Vector2(-Speed, 0)));
-            }
-            else if (moveRight && !moveLeft)
-            {
-                ChangeState(new MoveState(this, new Vector2(Speed, 0)));
-            }
-            else if (attack)
-            {
-                _currentState = new AttackState(this); ;
-            }
-            else if (block)
-            {
-                ChangeState(new BlockState(this));
-            }
-            else
-            {
-                ChangeState(new IdleState(this));
-            }
+        //public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
+        //{
+        //    if (moveLeft && !moveRight)
+        //    {
+        //        ChangeState(new MoveState(this, new Vector2(-Speed, 0)));
+        //    }
+        //    else if (moveRight && !moveLeft)
+        //    {
+        //        ChangeState(new MoveState(this, new Vector2(Speed, 0)));
+        //    }
+        //    else if (attack)
+        //    {
+        //        _currentState = new AttackState(this, AttackType.Hand); ;
+        //    }
+        //    else if (block)
+        //    {
+        //        ChangeState(new BlockState(this));
+        //    }
+        //    else
+        //    {
+        //        ChangeState(new IdleState(this));
+        //    }
 
-            _currentState.Update(this);
-        }
+        //    _currentState.Update(this);
+        //}
     }
 }
