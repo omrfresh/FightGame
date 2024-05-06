@@ -39,10 +39,10 @@ namespace Game
             Profile = ContextProfile.Core,
         })
         {
-            _player1Position = new Vector2(-0.5f, 0);
-            _player2Position = new Vector2(0.5f, 0);
-            _player1 = new Player(this, new Vector2(-0.5f, 0), "Player 1");
-            _player2 = new Player(this, new Vector2(0.5f, 0), "Player 2");
+            _player1Position = new Vector2(-0.5f, -0.5f);
+            _player2Position = new Vector2(0.5f, -0.5f);
+            _player1 = new Player(this, new Vector2(-0.5f, -0.5f), "Player 1");
+            _player2 = new Player(this, new Vector2(0.5f, -0.5f), "Player 2");
             _player1.Opponent = _player2;
             _player2.Opponent = _player1;
             _player1Controller = new PlayerController(_player1);
