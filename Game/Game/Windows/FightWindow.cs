@@ -12,6 +12,7 @@ namespace Game
     public class FightWindow : GameWindow
     {
         public double ElapsedTime { get; private set; }
+        public int TexHelper;
         //BackGround
         private Buffer _backgroundBuffer;
         private Texture _backgroundTexture;
@@ -142,6 +143,7 @@ namespace Game
             // Рендеринг состояний игроков
             var player1State = _player1Controller.CurrentState;
             var player2State = _player2Controller.CurrentState;
+
             if (player1State is AttackState attackState1)
             {
                 //Это тема с созданием нескольких текстур и их использованием(Память нормально используется, но есть приколы в Player, нужно определить в нём дохуя(5+-) texture, в целом годно) 
@@ -159,7 +161,7 @@ namespace Game
                 }
                 if (attackState1.Type == AttackType.Combo)
                 {
-                    _player2Texture = Texture.LoadFromFile(@"Textures\RedPlayer\Idle.png");
+                    _player2Texture = Texture.LoadFromFile(@"Textures\RedPlayer\LegPunch.png");
                 }
                 _player1Texture.Use(TextureUnit.Texture0);
                 _player1Buffer.Render(_player1Texture);
@@ -194,22 +196,20 @@ namespace Game
                 _player1Texture.Dispose();
             }
 
-            if(player2State is not DeadState) 
-            { 
-            }
+            
             if (player2State is AttackState attackState2)
             {
                 if (attackState2.Type == AttackType.Hand)
                 {
-                    _player2Texture = Texture.LoadFromFile(@"Textures\Text.png");
+                    _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Punch.png");
                 }
                 if (attackState2.Type == AttackType.Leg)
                 {
-                    _player2Texture = Texture.LoadFromFile(@"Textures\health_bar.png");
+                    _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\LegPunch.png");
                 }
                 if (attackState2.Type == AttackType.Combo)
                 {
-                    _player2Texture = Texture.LoadFromFile(@"Textures\health_bar.png");
+                    _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\KomboPunch.png");
                 }
                 _player2Texture.Use(TextureUnit.Texture0);
                 _player2Buffer.Render(_player2Texture);
@@ -218,21 +218,28 @@ namespace Game
             }
             else if (player2State is BlockState)
             {
-                _player2Texture = Texture.LoadFromFile(@"Textures\health_bar.png");
+                _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Block.png");
                 _player2Texture.Use(TextureUnit.Texture0);
                 _player2Buffer.Render(_player2Texture);
                 _player2Texture.Dispose();
             }
+            else if (player2State is MoveState)
+            {
+                _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Run.png");
+                _player2Texture.Use(TextureUnit.Texture0);
+                _player2Buffer.Render(_player1Texture);
+                _player2Texture.Dispose();
+            }
             else if (player2State is DeadState)
             {
-                _player2Texture = Texture.LoadFromFile(@"Textures\health_bar.png");
+                _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Death.png");
                 _player2Texture.Use(TextureUnit.Texture0);
                 _player2Buffer.Render(_player2Texture);
                 _player2Texture.Dispose();
             }
             else
             {
-                _player2Texture = Texture.LoadFromFile(@"Textures\Player2.png");
+                _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Idle.png");
                 _player2Texture.Use(TextureUnit.Texture0);
                 _player2Buffer.Render(_player2Texture);
                 _player2Texture.Dispose();

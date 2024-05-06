@@ -13,7 +13,7 @@ namespace Game
         }
         public IState CurrentState => _player.CurrentState;
 
-        public void Update(bool moveLeft, bool moveRight, bool attack, bool block, bool legAttack, bool comboAttack)
+        public void Update(bool moveLeft, bool moveRight, bool attack, bool legAttack, bool comboAttack, bool block)
         {
             if (_player.CurrentState is DeadState)
             {
