@@ -87,6 +87,7 @@ namespace Game.StateMachine
                     if (_opponent.Health <= 0)
                     {
                         IsOpponentKilled = true;
+                        _opponent.ChangeState(new DeadState(_opponent));
                         _attackTimer = 0;
                     }
                 }

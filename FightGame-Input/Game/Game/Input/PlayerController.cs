@@ -12,8 +12,13 @@ namespace Game
             _player = player;
         }
         public IState CurrentState => _player.CurrentState;
+
         public void Update(bool moveLeft, bool moveRight, bool attack, bool block, bool legAttack, bool comboAttack)
         {
+            if (_player.CurrentState is DeadState)
+            {
+                return;
+            }
             if (moveLeft && !moveRight)
             {
                 _player.ChangeState(new MoveState(_player, new Vector2(-_player.Speed, 0)));
@@ -40,7 +45,14 @@ namespace Game
             }
             else
             {
-                _player.ChangeState(new IdleState(_player));
+                if (_player.Health <= 0)
+                {
+                    _player.ChangeState(new DeadState(_player));
+                }
+                else
+                {
+                    _player.ChangeState(new IdleState(_player));
+                }
             }
 
             _player.Update();

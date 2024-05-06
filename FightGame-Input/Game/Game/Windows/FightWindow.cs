@@ -179,6 +179,13 @@ namespace Game
                 _player1Buffer.Render(_player1Texture);
                 _player1Texture.Dispose();
             }
+            else if (player1State is DeadState)
+            {
+                _player1Texture = Texture.LoadFromFile(@"Textures\RedPlayer\Death.png");
+                _player1Texture.Use(TextureUnit.Texture0);
+                _player1Buffer.Render(_player1Texture);
+                _player1Texture.Dispose();
+            }
             else
             {
                 _player1Texture = Texture.LoadFromFile(@"Textures\RedPlayer\Idle.png");
@@ -187,6 +194,9 @@ namespace Game
                 _player1Texture.Dispose();
             }
 
+            if(player2State is not DeadState) 
+            { 
+            }
             if (player2State is AttackState attackState2)
             {
                 if (attackState2.Type == AttackType.Hand)
@@ -213,6 +223,13 @@ namespace Game
                 _player2Buffer.Render(_player2Texture);
                 _player2Texture.Dispose();
             }
+            else if (player2State is DeadState)
+            {
+                _player2Texture = Texture.LoadFromFile(@"Textures\health_bar.png");
+                _player2Texture.Use(TextureUnit.Texture0);
+                _player2Buffer.Render(_player2Texture);
+                _player2Texture.Dispose();
+            }
             else
             {
                 _player2Texture = Texture.LoadFromFile(@"Textures\Player2.png");
@@ -221,6 +238,27 @@ namespace Game
                 _player2Texture.Dispose();
             }
             SwapBuffers();
+            // Проверка на смерть игроков
+            if (_player1.CurrentState is DeadState && _player2.CurrentState is not DeadState)
+            {
+                // Вызов FinishWindow с текстом "Игрок 2 победил!"
+                var finishWindow = new FinishWindow("Игрок 2 победил!");
+                finishWindow.ShowDialog();
+
+                // Завершение игры
+                this.Close();
+
+            }
+            else if (_player2.CurrentState is DeadState && _player1.CurrentState is not DeadState)
+            {
+                // Вызов FinishWindow с текстом "Игрок 1 победил!"
+                var finishWindow = new FinishWindow("Игрок 1 победил!");
+                finishWindow.ShowDialog();
+
+                // Завершение игры
+                Environment.Exit(0);
+
+            }
         }
 
         protected override void OnUnload()
