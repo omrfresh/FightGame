@@ -56,6 +56,9 @@
     <None Update="Textures\health_bar.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Textures\MainBackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Textures\Player2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
