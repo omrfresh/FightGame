@@ -91,15 +91,13 @@ namespace Game
             _player2Buffer = new Buffer(player2Vertices);
            
             _player1Texture = Texture.LoadFromFile(@"Textures\RedPlayer\Idle.png");
-            _player2Texture = Texture.LoadFromFile(@"Textures\Player2.png");
+            _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Idle.png");
 
             _player1.PlayerBuffer = _player1Buffer;
             _player1.PlayerTexture = _player1Texture;
             _player2.PlayerBuffer = _player2Buffer;
             _player2.PlayerTexture = _player2Texture;
 
-            //Можно убрать нахуй
-            _player1.AttackTexture = Texture.LoadFromFile(@"Textures\RedPlayer\Punch.png");
         }
         /// <summary>
         /// Метод для обработки действий персонажа и обновления его состояния(Для обоих игроков)
@@ -251,9 +249,7 @@ namespace Game
                 // Вызов FinishWindow с текстом "Игрок 2 победил!"
                 var finishWindow = new FinishWindow("Игрок 2 победил!");
                 finishWindow.ShowDialog();
-
                 // Завершение игры
-                this.Close();
 
             }
             else if (_player2.CurrentState is DeadState && _player1.CurrentState is not DeadState)
@@ -261,10 +257,7 @@ namespace Game
                 // Вызов FinishWindow с текстом "Игрок 1 победил!"
                 var finishWindow = new FinishWindow("Игрок 1 победил!");
                 finishWindow.ShowDialog();
-
                 // Завершение игры
-                Environment.Exit(0);
-
             }
         }
 

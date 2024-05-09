@@ -3,6 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button x:Name="PlayButton" Content="Играть" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="Textures/MainBackground.png" />
+        </Grid.Background>
+        <Button x:Name="PlayButton" Content="Играть" Foreground="HotPink" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="Transparent">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="ExitButton" Content="Выйти" Foreground="HotPink" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="ExitButton_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="Transparent">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

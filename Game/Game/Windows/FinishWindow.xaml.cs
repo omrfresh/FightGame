@@ -20,5 +20,10 @@ namespace Game
             var fightWindow = new FightWindow();
             fightWindow.Run();
         }
+        private void ExitToMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Application.Current.Shutdown();
+        }
+
     }
 }

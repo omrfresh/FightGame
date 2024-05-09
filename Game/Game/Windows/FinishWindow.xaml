@@ -1,14 +1,22 @@
 ﻿<Window x:Class="Game.FinishWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FinishWindow" Height="200" Width="300">
+        Title="FinishWindow" Height="300" Width="400">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Textures/Resultground.png" />
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="WinnerTextBlock" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
-        <Button x:Name="PlayAgainButton" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="10, 5" FontSize="16" Content="Играть снова" Click="PlayAgainButton_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="WinnerTextBlock" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+        <Button x:Name="PlayAgainButton" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="65,0,0,0" Padding="10, 5" FontSize="16" Content="Играть снова" Click="PlayAgainButton_Click" Width="125"/>
+        <Button x:Name="ExitToMenuButton" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Padding="10, 5" FontSize="16" Content="Выйти" Click="ExitToMenuButton_Click" Width="125"/>
     </Grid>
 </Window>

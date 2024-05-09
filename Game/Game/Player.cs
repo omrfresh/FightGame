@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
 using Game;
 using System.ComponentModel;
-//
+// TO DO: Коллизия
 namespace Game
 {
     public class Player
@@ -17,8 +17,6 @@ namespace Game
         public bool IsBlocking { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
-        //Можно убрать AttackTexture
-        public Texture AttackTexture { get; set; }
         public FightWindow gameWindow { get; private set; }
         public Player Opponent { get; set; }
         private IState _currentState;
@@ -50,14 +48,7 @@ namespace Game
 
         public void Update()
         {
-            if (_currentState is AttackState)
-            {
-                PlayerTexture = AttackTexture;
-            }
-            else
-            {
-                PlayerTexture = PlayerTexture;
-            }
+             PlayerTexture = PlayerTexture;
             _currentState.Update(this);
             UpdateBuffer();
         }
