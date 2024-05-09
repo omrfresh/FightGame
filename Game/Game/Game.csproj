@@ -70,7 +70,7 @@
     <None Update="Textures\Buttonground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Textures\health_bar.PNG">
+    <None Update="Textures\HealthBar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Textures\Player2.png">
@@ -103,6 +103,10 @@
     <None Update="Textures\Text.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Новая папка\" />
   </ItemGroup>
 
 </Project>

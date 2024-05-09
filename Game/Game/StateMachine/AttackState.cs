@@ -12,12 +12,6 @@ using OpenTK.Mathematics;
 
 namespace Game.StateMachine
 {
-    //public enum AttackType
-    //{
-    //    Hand,
-    //    Leg,
-    //    Combo
-    //}
     public class AttackState : IState
     {
         private float _attackTimer;
@@ -67,10 +61,10 @@ namespace Game.StateMachine
                         switch (Type)
                         {
                             case AttackType.Combo:
-                                damageMultiplier = 1.5f;
+                                damageMultiplier = 1.75f;
                                 break;
                             case AttackType.Leg:
-                                damageMultiplier = 1.25f;
+                                damageMultiplier = 1.35f;
                                 break;
                         }
 
@@ -100,40 +94,3 @@ namespace Game.StateMachine
         }
     }
 }
-
-
-////public void Update(Player player)
-////{
-////    _attackTimer += (float)_player.gameWindow.ElapsedTime;
-
-////    if (_attackTimer >= _attackCooldown)
-////    {
-////        var opponent = GameEngine.GetOpponent(_player);
-
-////        if (opponent != null && GameEngine.IsInRange(_player, opponent, _player.AttackRange))
-////        {
-////            if (opponent.GetCurrentState() is BlockState && opponent.IsBlocked)
-////            {
-////                // Удар блокирован
-////                opponent.Health -= _player.Damage * 0.5f;
-////            }
-////            else
-////            {
-////                opponent.Health -= _player.Damage;
-
-////                if (opponent.Health <= 0)
-////                {
-////                    IsOpponentKilled = true;
-////                }
-////            }
-////        }
-
-////        _attackTimer = 0f;
-////    }
-
-////    // Если атака завершена, переходим в состояние "ожидание"
-////    if (_attackTimer == 0)
-////    {
-////        _player.ChangeState(new IdleState(_player));
-////    }
-////}

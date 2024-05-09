@@ -21,6 +21,7 @@ namespace Game
         public Player Opponent { get; set; }
         private IState _currentState;
         public IState CurrentState => _currentState;
+        public BoundingBox BoundingBox { get; private set; }
 
         //Конструктор
         public Player(FightWindow gameWindow, Vector2 position, string name)
@@ -35,6 +36,7 @@ namespace Game
             Speed = 1.15f;
             this.gameWindow = gameWindow;
             _currentState = new IdleState(this);
+            BoundingBox = new BoundingBox(position, new Vector2(0.5f, 0.5f));
 
         }
 
@@ -45,21 +47,13 @@ namespace Game
             _currentState = newState;
             _currentState.Enter(this);
         }
-
         public void Update()
         {
-             PlayerTexture = PlayerTexture;
+            BoundingBox.Position = Position;
+            PlayerTexture = PlayerTexture;
             _currentState.Update(this);
             UpdateBuffer();
         }
-        //public void Attack()
-        //{
-        //    _currentState = new AttackState(this);
-        //}
-        //public IState GetCurrentState()
-        //{
-        //    return _currentState;
-        //}
         public void Block()
         {
             IsBlocking = true;
@@ -84,42 +78,5 @@ namespace Game
 
             PlayerBuffer.UpdateData(playerVertices);
         }
-        //public void UpdateTextureCoordinates()
-        //{
-        //    double[] textureCoordinates = new double[]
-        //    {
-        //      Position.X - 0.25, Position.Y + 0.25,
-        //      Position.X + 0.25, Position.Y + 0.25,
-        //      Position.X + 0.25, Position.Y - 0.25,
-        //      Position.X - 0.25, Position.Y - 0.25,
-        //    };
-
-        //    PlayerBuffer.UpdateData(textureCoordinates, 2 * sizeof(double));
-        //}
-        //public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
-        //{
-        //    if (moveLeft && !moveRight)
-        //    {
-        //        ChangeState(new MoveState(this, new Vector2(-Speed, 0)));
-        //    }
-        //    else if (moveRight && !moveLeft)
-        //    {
-        //        ChangeState(new MoveState(this, new Vector2(Speed, 0)));
-        //    }
-        //    else if (attack)
-        //    {
-        //        _currentState = new AttackState(this, AttackType.Hand); ;
-        //    }
-        //    else if (block)
-        //    {
-        //        ChangeState(new BlockState(this));
-        //    }
-        //    else
-        //    {
-        //        ChangeState(new IdleState(this));
-        //    }
-
-        //    _currentState.Update(this);
-        //}
     }
 }
