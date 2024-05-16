@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
 using Game;
 using System.ComponentModel;
-// TO DO: Коллизия
+
 namespace Game
 {
     public class Player
@@ -15,6 +15,7 @@ namespace Game
         public float Speed { get; set; }
         public string Name { get; set; } 
         public bool IsBlocking { get; private set; }
+        public float LastAttackTime { get; private set; } = 0f;
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
         public FightWindow gameWindow { get; private set; }

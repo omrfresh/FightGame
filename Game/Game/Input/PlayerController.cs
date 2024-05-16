@@ -6,7 +6,7 @@ namespace Game
     public class PlayerController
     {
         private Player _player;
-
+        private bool attackPressed;
         public PlayerController(Player player)
         {
             _player = player;
