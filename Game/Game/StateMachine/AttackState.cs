@@ -26,7 +26,10 @@ namespace Game.StateMachine
             _opponent = player.Opponent;
             Type = type;
         }
-
+        public float GetAttackTimer()
+        {
+            return _attackTimer;
+        }
         public void Enter(Player player)
         {
             _attackTimer = 0;

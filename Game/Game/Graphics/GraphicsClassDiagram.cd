@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game.Texture" Collapsed="true">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAEAA=</HashCode>
+      <FileName>Graphics\Programs\Texture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Shader" Collapsed="true">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAACAAAgAMAAAAAAAAAAAEAAISJAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Programs\Shader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.RectangleWithTexture" Collapsed="true">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Graphics\RectangleWithTexture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Rectangle" Collapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAgAIAAAAkBAAAAAAACBAAAAAAAAAAAAAAEBAAMA=</HashCode>
+      <FileName>Graphics\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Point" Collapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAYBE=</HashCode>
+      <FileName>Graphics\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Buffer" Collapsed="true">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAESAAAAQAAAAAAAAAAAAQAAgAABAAAEAAQAA=</HashCode>
+      <FileName>Graphics\Programs\Buffer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.TexturePoint" Collapsed="true">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABDEAAA=</HashCode>
+      <FileName>Graphics\TexturePoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

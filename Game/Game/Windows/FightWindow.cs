@@ -13,7 +13,9 @@ namespace Game
     public class FightWindow : GameWindow
     {
         public double ElapsedTime { get; private set; }
+        private MainWindow _mainWindow;
         public int TexHelper;
+        private System.Timers.Timer closeTimer;
         //BackGround
         private Buffer _backgroundBuffer;
         private Texture _backgroundTexture;
@@ -131,6 +133,12 @@ namespace Game
             {
                 // Обработка столкновений
                 HandleCollision(_player1, _player2);
+            }
+
+            if (_player1.CurrentState is DeadState || _player2.CurrentState is DeadState)
+            {
+                //Close();
+                return;
             }
 
         }
@@ -268,16 +276,17 @@ namespace Game
             // Проверка на смерть игроков
             if (_player1.CurrentState is DeadState && _player2.CurrentState is not DeadState)
             {
+                //Dispose();
                 // Вызов FinishWindow с текстом "Игрок 2 победил!"
-                var finishWindow = new FinishWindow("Игрок 2 победил!");
+                var finishWindow = new FinishWindow("Игрок 2 победил!", this, _mainWindow);
                 finishWindow.ShowDialog();
                 // Завершение игры
-
             }
             else if (_player2.CurrentState is DeadState && _player1.CurrentState is not DeadState)
             {
+                //Dispose();
                 // Вызов FinishWindow с текстом "Игрок 1 победил!"
-                var finishWindow = new FinishWindow("Игрок 1 победил!");
+                var finishWindow = new FinishWindow("Игрок 1 победил!", this, _mainWindow);
                 finishWindow.ShowDialog();
                 // Завершение игры
             }
@@ -347,7 +356,19 @@ namespace Game
                 player2.Position += offset;
             }
         }
+        public void Reset()
+        {
+            _player1.Reset();
+            _player2.Reset();
 
+            _player1Position = new Vector2(-0.5f, -0.5f);
+            _player2Position = new Vector2(0.5f, -0.5f);
 
+            _player1.Position = _player1Position;
+            _player2.Position = _player2Position;
+
+            _player1HealthBar.Update(_player1.Health);
+            _player2HealthBar.UpdateLeftToRight(_player2.Health);
+        }
     }
 }

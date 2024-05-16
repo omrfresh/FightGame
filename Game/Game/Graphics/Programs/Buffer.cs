@@ -37,14 +37,6 @@ namespace Game
             this.vertices = vertices;
             GenerateBuffers();
         }
-        //public void Render(Texture texture, OpenTK.Mathematics.Vector2 position)
-        //{
-        //    GL.BindVertexArray(vertexArrayObject);
-        //    texture.Use(TextureUnit.Texture0);
-        //    shader.Use();
-        //    shader.SetVector2("u_Position", position);
-        //    GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length / 5);
-        //}
         private void GenerateBuffers()
         {
             vertexArrayObject = GL.GenVertexArray();

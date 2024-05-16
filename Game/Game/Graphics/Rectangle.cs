@@ -6,25 +6,38 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    // Класс для представления прямоугольника
     public class Rectangle
     {
+        // Верхняя левая точка прямоугольника
         public Point TopLeft { get; set; }
+        // Верхняя правая точка прямоугольника
         public Point TopRight { get; set; }
+        // Нижняя правая точка прямоугольника
         public Point BottomRight { get; set; }
+        // Нижняя левая точка прямоугольника
         public Point BottomLeft { get; set; }
+        // Массив всех точек прямоугольника
         public Point[] Points { get; set; }
+
+        // Конструктор прямоугольника с заданными точками
         public Rectangle(Point topLeft, Point topRight, Point bottomRight, Point bottomLeft)
         {
             SetPnts(topLeft, topRight, bottomRight, bottomLeft);
         }
-        public Rectangle(Point topLeft, double width, double hidth)
+
+        // Конструктор прямоугольника с заданной верхней левой точкой, шириной и высотой
+        public Rectangle(Point topLeft, double width, double height)
         {
-            SetPnts(topLeft, width, hidth);
+            SetPnts(topLeft, width, height);
         }
+
+        // Конструктор по умолчанию
         public Rectangle()
         {
-
         }
+
+        // Установка точек прямоугольника
         public void SetPnts(Point topLeft, Point topRight, Point bottomRight, Point bottomLeft)
         {
             Points = new Point[4];
@@ -34,7 +47,8 @@ namespace Game
             Points[3] = BottomLeft = bottomLeft;
         }
 
-        public void SetPnts(Point topLeft, double width, double hidth)
+        // Установка точек прямоугольника по верхней левой точке, ширине и высоте
+        public void SetPnts(Point topLeft, double width, double height)
         {
             Points = new Point[4];
 
@@ -50,37 +64,36 @@ namespace Game
             Points[2] = BottomRight = new Point
                 (
                     topLeft.X + width,
-                    topLeft.Y - hidth,
+                    topLeft.Y - height,
                     topLeft.Z
                 );
             Points[3] = BottomLeft = new Point
                 (
                     topLeft.X,
-                    topLeft.Y - hidth,
+                    topLeft.Y - height,
                     topLeft.Z
                 );
         }
-        /// <summary>
-        /// Получить ширину объекта
-        /// </summary>
-        /// <returns></returns>
+
+        // Получить ширину объекта
         public double GetWidth()
         {
             return Math.Abs(TopRight.X - TopLeft.X);
         }
-        /// <summary>
-        /// Получить высоту объекта
-        /// </summary>
-        /// <returns></returns>
+
+        // Получить высоту объекта
         public double GetHeight()
         {
             return Math.Abs(TopLeft.Y - BottomLeft.Y);
         }
 
+        // Преобразовать координаты точек прямоугольника в массив
         public double[] ToArray()
         {
             return Points[0].ToArray().Concat(Points[1].ToArray()).ToArray().Concat(Points[2].ToArray()).ToArray().Concat(Points[3].ToArray()).ToArray();
         }
+
+        // Проверить, пересекаются ли данный прямоугольник и другой прямоугольник
         public bool Intersects(Rectangle other)
         {
             // Погрешность границ объекта, устанавливается для более корректной работы колизий объектов
@@ -92,6 +105,7 @@ namespace Game
                      (other.BottomLeft.Y + other.GetHeight() * correctNum) > TopLeft.Y);
         }
 
+        // Сдвинуть прямоугольник по оси X на заданное расстояние
         public void MoveX(double X)
         {
             foreach (var point in Points)
@@ -100,6 +114,7 @@ namespace Game
             }
         }
 
+        // Сдвинуть прямоугольник по оси Y на заданное расстояние
         public void MoveY(double Y)
         {
             foreach (var point in Points)
@@ -108,4 +123,5 @@ namespace Game
             }
         }
     }
+
 }

@@ -10,9 +10,13 @@
 
   <ItemGroup>
     <Compile Remove="State\**" />
+    <Compile Remove="Новая папка\**" />
     <EmbeddedResource Remove="State\**" />
+    <EmbeddedResource Remove="Новая папка\**" />
     <None Remove="State\**" />
+    <None Remove="Новая папка\**" />
     <Page Remove="State\**" />
+    <Page Remove="Новая папка\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,10 +107,6 @@
     <None Update="Textures\Text.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Новая папка\" />
   </ItemGroup>
 
 </Project>

@@ -78,5 +78,11 @@ namespace Game
 
             PlayerBuffer.UpdateData(playerVertices);
         }
+        public void Reset()
+        {
+            Health = 100;
+            _currentState = new IdleState(this);
+        }
+
     }
 }
