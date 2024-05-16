@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game.Buffer" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAESAAAAQAAAAAAAAAAAAQAAgAABAAAEAAQAA=</HashCode>
+      <FileName>Graphics\Programs\Buffer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Shader" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAACAAAgAMAAAAAAAAAAAEAAISJAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Programs\Shader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Texture" Collapsed="true">
+    <Position X="15.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAEAA=</HashCode>
+      <FileName>Graphics\Programs\Texture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Point" Collapsed="true">
+    <Position X="14" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAYBE=</HashCode>
+      <FileName>Graphics\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Rectangle" Collapsed="true">
+    <Position X="15.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAgAIAAAAkBAAAAAAACBAAAAAAAAAAAAAAEBAAMA=</HashCode>
+      <FileName>Graphics\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.RectangleWithTexture" Collapsed="true">
+    <Position X="14" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Graphics\RectangleWithTexture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.TexturePoint" Collapsed="true">
+    <Position X="15.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABDEAAA=</HashCode>
+      <FileName>Graphics\TexturePoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.PlayerController" Collapsed="true">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Input\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.FightWindow" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACRAAAAQAAICBCAQAABIAACAABAEiCEAAAAAADQgAA=</HashCode>
+      <FileName>Windows\FightWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.FinishWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAACAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\FinishWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.BoundingBox" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAgAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>BoundingBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.GameEngine" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAgAAAQAAAg=</HashCode>
+      <FileName>GameEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.HealthBar" Collapsed="true">
+    <Position X="9.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQASAIAAAAAAAAAAAAAAABAAACABAAgAKAAAA=</HashCode>
+      <FileName>HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAEAAAAAAAABAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Player" Collapsed="true">
+    <Position X="11.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQECBCAAAAABAIgAABAACQBACAAACAABAAAAAAIUBA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.StateMachine.AttackState" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAABAAACAAAAAAEAAAAIQQARAAAEAA=</HashCode>
+      <FileName>StateMachine\AttackState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.252" />
+  </Class>
+  <Class Name="Game.StateMachine.BlockState" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAECAAAAAAEAgQAIAAAAAAAAIA=</HashCode>
+      <FileName>StateMachine\BlockState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="Game.StateMachine.DeadState" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>StateMachine\DeadState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.304" />
+  </Class>
+  <Class Name="Game.StateMachine.IdleState" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>StateMachine\IdleState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.StateMachine.MoveState" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAEAAAAIAAIAAAAAAA=</HashCode>
+      <FileName>StateMachine\MoveState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.185" />
+  </Class>
+  <Interface Name="Game.StateMachine.IState" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>StateMachine\IState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Game.StateMachine.AttackType" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAIAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMachine\AttackType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

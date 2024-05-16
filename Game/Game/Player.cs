@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
 using Game;
 using System.ComponentModel;
-//
+// TO DO: Коллизия
 namespace Game
 {
     public class Player
@@ -17,12 +17,11 @@ namespace Game
         public bool IsBlocking { get; private set; }
         public Buffer PlayerBuffer { get; set; }
         public Texture PlayerTexture { get; set; }
-        //Можно убрать AttackTexture
-        public Texture AttackTexture { get; set; }
         public FightWindow gameWindow { get; private set; }
         public Player Opponent { get; set; }
         private IState _currentState;
         public IState CurrentState => _currentState;
+        public BoundingBox BoundingBox { get; private set; }
 
         //Конструктор
         public Player(FightWindow gameWindow, Vector2 position, string name)
@@ -37,6 +36,7 @@ namespace Game
             Speed = 1.15f;
             this.gameWindow = gameWindow;
             _currentState = new IdleState(this);
+            BoundingBox = new BoundingBox(position, new Vector2(0.5f, 0.5f));
 
         }
 
@@ -47,28 +47,13 @@ namespace Game
             _currentState = newState;
             _currentState.Enter(this);
         }
-
         public void Update()
         {
-            if (_currentState is AttackState)
-            {
-                PlayerTexture = AttackTexture;
-            }
-            else
-            {
-                PlayerTexture = PlayerTexture;
-            }
+            BoundingBox.Position = Position;
+            PlayerTexture = PlayerTexture;
             _currentState.Update(this);
             UpdateBuffer();
         }
-        //public void Attack()
-        //{
-        //    _currentState = new AttackState(this);
-        //}
-        //public IState GetCurrentState()
-        //{
-        //    return _currentState;
-        //}
         public void Block()
         {
             IsBlocking = true;
@@ -93,42 +78,11 @@ namespace Game
 
             PlayerBuffer.UpdateData(playerVertices);
         }
-        //public void UpdateTextureCoordinates()
-        //{
-        //    double[] textureCoordinates = new double[]
-        //    {
-        //      Position.X - 0.25, Position.Y + 0.25,
-        //      Position.X + 0.25, Position.Y + 0.25,
-        //      Position.X + 0.25, Position.Y - 0.25,
-        //      Position.X - 0.25, Position.Y - 0.25,
-        //    };
+        public void Reset()
+        {
+            Health = 100;
+            _currentState = new IdleState(this);
+        }
 
-        //    PlayerBuffer.UpdateData(textureCoordinates, 2 * sizeof(double));
-        //}
-        //public void Update(bool moveLeft, bool moveRight, bool attack, bool block)
-        //{
-        //    if (moveLeft && !moveRight)
-        //    {
-        //        ChangeState(new MoveState(this, new Vector2(-Speed, 0)));
-        //    }
-        //    else if (moveRight && !moveLeft)
-        //    {
-        //        ChangeState(new MoveState(this, new Vector2(Speed, 0)));
-        //    }
-        //    else if (attack)
-        //    {
-        //        _currentState = new AttackState(this, AttackType.Hand); ;
-        //    }
-        //    else if (block)
-        //    {
-        //        ChangeState(new BlockState(this));
-        //    }
-        //    else
-        //    {
-        //        ChangeState(new IdleState(this));
-        //    }
-
-        //    _currentState.Update(this);
-        //}
     }
 }

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameTest.AttackStateTests" Collapsed="true">
+    <Position X="4.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AttackStateTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameTest.BoundingBoxTests" Collapsed="true">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>BoundingBoxTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameTest.GameEngineTests" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameEngineTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameTest.PlayerTests" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIABAAgAAAAAAAAAAAAAABBIAAAxAAAAAgAAAA=</HashCode>
+      <FileName>PlayerTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameTest.PointTests" Collapsed="true">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAgAAAAAAAAAACAAAAAAAAEAAAA=</HashCode>
+      <FileName>PointTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameTest.RectangleTests" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAiAAAAAAAAAAAAAAAEAAAAAAAAAEAAAEAAAA=</HashCode>
+      <FileName>RectangleTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameTest.TexturePointTests" Collapsed="true">
+    <Position X="4.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEAAAA=</HashCode>
+      <FileName>TexturePointTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

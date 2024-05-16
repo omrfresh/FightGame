@@ -5,6 +5,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.IO;
+using System.Windows.Controls;
 
 
 namespace Game
@@ -12,7 +13,9 @@ namespace Game
     public class FightWindow : GameWindow
     {
         public double ElapsedTime { get; private set; }
+        private MainWindow _mainWindow;
         public int TexHelper;
+        private System.Timers.Timer closeTimer;
         //BackGround
         private Buffer _backgroundBuffer;
         private Texture _backgroundTexture;
@@ -28,8 +31,10 @@ namespace Game
         private Texture _player2Texture;
         private Vector2 _player2Position;
         private PlayerController _player2Controller;
-        //EndGame(INProgress)
         //HealthBar
+        private HealthBar _player1HealthBar;
+        private HealthBar _player2HealthBar;
+        private Shader _shader;
         public FightWindow() : base(new GameWindowSettings()
         {
 
@@ -38,6 +43,8 @@ namespace Game
         {
             API = ContextAPI.OpenGL,
             Profile = ContextProfile.Core,
+            WindowBorder = WindowBorder.Hidden,
+            WindowState = WindowState.Maximized,
         })
         {
             _player1Position = new Vector2(-0.5f, -0.5f);
@@ -48,8 +55,6 @@ namespace Game
             _player2.Opponent = _player1;
             _player1Controller = new PlayerController(_player1);
             _player2Controller = new PlayerController(_player2);
-
-
         }
 
         protected override void OnLoad()
@@ -91,15 +96,19 @@ namespace Game
             _player2Buffer = new Buffer(player2Vertices);
            
             _player1Texture = Texture.LoadFromFile(@"Textures\RedPlayer\Idle.png");
-            _player2Texture = Texture.LoadFromFile(@"Textures\Player2.png");
+            _player2Texture = Texture.LoadFromFile(@"Textures\BluePlayer\Idle.png");
 
             _player1.PlayerBuffer = _player1Buffer;
             _player1.PlayerTexture = _player1Texture;
             _player2.PlayerBuffer = _player2Buffer;
             _player2.PlayerTexture = _player2Texture;
 
-            //Можно убрать нахуй
-            _player1.AttackTexture = Texture.LoadFromFile(@"Textures\RedPlayer\Punch.png");
+            _shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
+            _player1HealthBar = new HealthBar(_shader, new Vector2(-1.0f, 0.9f), new Vector2(0.5f, 0.1f), _player1.Health);
+            _player2HealthBar = new HealthBar(_shader, new Vector2(0.5f, 0.9f), new Vector2(0.5f, 0.1f), _player2.Health);
+
+
+
         }
         /// <summary>
         /// Метод для обработки действий персонажа и обновления его состояния(Для обоих игроков)
@@ -116,6 +125,22 @@ namespace Game
             //Обновлдение буфера 
             _player1.UpdateBuffer();
             _player2.UpdateBuffer();
+
+            _player1HealthBar.Update(_player1.Health);
+            _player2HealthBar.UpdateLeftToRight(_player2.Health);
+
+            if (_player1.BoundingBox.IsCollidingWith(_player2.BoundingBox))
+            {
+                // Обработка столкновений
+                HandleCollision(_player1, _player2);
+            }
+
+            if (_player1.CurrentState is DeadState || _player2.CurrentState is DeadState)
+            {
+                //Close();
+                return;
+            }
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -143,6 +168,9 @@ namespace Game
             // Рендеринг состояний игроков
             var player1State = _player1Controller.CurrentState;
             var player2State = _player2Controller.CurrentState;
+
+            _player1HealthBar.Render();
+            _player2HealthBar.Render();
 
             if (player1State is AttackState attackState1)
             {
@@ -248,23 +276,19 @@ namespace Game
             // Проверка на смерть игроков
             if (_player1.CurrentState is DeadState && _player2.CurrentState is not DeadState)
             {
+                //Dispose();
                 // Вызов FinishWindow с текстом "Игрок 2 победил!"
-                var finishWindow = new FinishWindow("Игрок 2 победил!");
+                var finishWindow = new FinishWindow("Игрок 2 победил!", this, _mainWindow);
                 finishWindow.ShowDialog();
-
                 // Завершение игры
-                this.Close();
-
             }
             else if (_player2.CurrentState is DeadState && _player1.CurrentState is not DeadState)
             {
+                //Dispose();
                 // Вызов FinishWindow с текстом "Игрок 1 победил!"
-                var finishWindow = new FinishWindow("Игрок 1 победил!");
+                var finishWindow = new FinishWindow("Игрок 1 победил!", this, _mainWindow);
                 finishWindow.ShowDialog();
-
                 // Завершение игры
-                Environment.Exit(0);
-
             }
         }
 
@@ -281,6 +305,9 @@ namespace Game
             _player1Texture.Dispose();
             _player2Buffer.Dispose();
             _player2Texture.Dispose();
+
+            _player1HealthBar.Dispose();
+            _player2HealthBar.Dispose();
         }
 
         protected override void OnResize(ResizeEventArgs e)
@@ -288,6 +315,60 @@ namespace Game
             base.OnResize(e);
 
             GL.Viewport(0, 0, Size.X, Size.Y);
+        }
+        private void HandleCollision(Player player1, Player player2)
+        {
+            // Предотвращение прохождения друг через друга
+            // Вычисление направления столкновения
+            Vector2 direction = Vector2.Zero;
+            if (player1.Position.X < player2.Position.X)
+            {
+                direction.X = 1;
+            }
+            else if (player1.Position.X > player2.Position.X)
+            {
+                direction.X = -1;
+            }
+
+            if (player1.Position.Y < player2.Position.Y)
+            {
+                direction.Y = 1;
+            }
+            else if (player1.Position.Y > player2.Position.Y)
+            {
+                direction.Y = -1;
+            }
+
+            // Разделение пересекающихся игроков
+            float overlapX = Math.Abs((player1.Position.X + player1.BoundingBox.Size.X / 2) - (player2.Position.X + player2.BoundingBox.Size.X / 2)) - (player1.BoundingBox.Size.X + player2.BoundingBox.Size.X) / 2;
+            float overlapY = Math.Abs((player1.Position.Y + player1.BoundingBox.Size.Y / 2) - (player2.Position.Y + player2.BoundingBox.Size.Y / 2)) - (player1.BoundingBox.Size.Y + player2.BoundingBox.Size.Y) / 2;
+
+            // Отладка
+            string logMessage = $"HandleCollision called. Player1: ({player1.Position.X}, {player1.Position.Y}), Player2: ({player2.Position.X}, {player2.Position.Y}), OverlapX: {overlapX}, OverlapY: {overlapY}";
+            System.IO.File.AppendAllText("collision_log.txt", logMessage + Environment.NewLine);
+
+            if (overlapX > 0 || overlapY > 0)
+            {
+                // Смещение позиции игроков назад в зависимости от скорости и направления движения
+                float speedFactor = Math.Min(player1.Speed, player2.Speed);
+                Vector2 offset = direction * new Vector2(overlapX + speedFactor, overlapY + speedFactor);
+                player1.Position -= offset;
+                player2.Position += offset;
+            }
+        }
+        public void Reset()
+        {
+            _player1.Reset();
+            _player2.Reset();
+
+            _player1Position = new Vector2(-0.5f, -0.5f);
+            _player2Position = new Vector2(0.5f, -0.5f);
+
+            _player1.Position = _player1Position;
+            _player2.Position = _player2Position;
+
+            _player1HealthBar.Update(_player1.Health);
+            _player2HealthBar.UpdateLeftToRight(_player2.Health);
         }
     }
 }
